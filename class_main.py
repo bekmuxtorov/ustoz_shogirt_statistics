@@ -41,5 +41,13 @@ class Define:
                 continue
 
 
-content = Define()
-content.write_sql(28940, 28952)
+def main():
+    first_message_id = int(input('first_message_id: '))
+    last_message_id = int(input('last_message_id: '))
+
+    content = Define()
+    content.write_sql(first_message_id, last_message_id)
+
+
+if __name__ == "__main__":
+    main()
