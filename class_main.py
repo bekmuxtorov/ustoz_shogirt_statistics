@@ -20,7 +20,10 @@ class Define:
             soup = BeautifulSoup(request.content, "html.parser")
             elements = soup.find("meta", attrs={"name": "twitter:description"})
             content = elements.get("content")
-            return content.replace(' ', '').splitlines()[-3].split('#')
+            try:
+                return content.replace(' ', '').splitlines()[-3].split('#')
+            except IndexError:
+                pass
         else:
             return None
 

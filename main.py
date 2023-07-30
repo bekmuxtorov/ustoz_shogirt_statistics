@@ -10,7 +10,10 @@ def define_content(message_id: int) -> list[str]:
         soup = BeautifulSoup(request.content, "html.parser")
         elements = soup.find("meta", attrs={"name": "twitter:description"})
         content = elements.get("content")
-        return content.replace(' ', '').splitlines()[-3].split('#')
+        try:
+            return content.replace(' ', '').splitlines()[-3].split('#')
+        except IndexError:
+            pass
     else:
         return None
 
@@ -20,8 +23,10 @@ def get_message_id(url: str) -> int:
 
 
 def main():
-    first_message = 'https://t.me/UstozShogird/28940'
-    last_message = 'https://t.me/UstozShogird/28952'
+    first_message_id = input('first_message_id: ')
+    first_message = 'https://t.me/UstozShogird/' + first_message_id
+    last_message_id = input('first_message_id: ')
+    last_message = 'https://t.me/UstozShogird/' + last_message_id
     for i in range(get_message_id(first_message), get_message_id(last_message)+1):
         start_time = datetime.now()
         content = define_content(i)
